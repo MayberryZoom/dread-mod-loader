@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "dread-mod-loader"
+version = "0.0.0"
+requires-python = ">= 3.12"
+dependencies = [
+    "open-dread-rando>=2.14.0",
+    "pyside6>=6.8.0",
+    "pyqtdarktheme-fork>=2.3.2"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.3",
+    "pytest-qt>=4.4.0",
+    "pyinstaller>=6.11.0",
+    "pre-commit>=4.0.1",
+]
+
+[tool.ruff]
+line-length = 120
+lint.select = ["F", "E", "W", "I", "UP"]
+
+[tool.coverage.run]
+omit = [
+    # pyside imports these from a zip file, which causes
+    # coverage to think they exist when they really don't
+    # see https://github.com/nedbat/coveragepy/issues/1392
+    "shibokensupport/*",
+    "pyscript",
+    "signature_bootstrap.py",
+]

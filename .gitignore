@@ -1,0 +1,17 @@
+.venv
+venv
+.vscode
+.ruff_cache
+dist
+__pycache__
+*.spec
+*.egg-info/
+build/
+.pytest_cache/
+
+generated
+
+mods
+**/ui_files/*.py
+.env
+.coverage

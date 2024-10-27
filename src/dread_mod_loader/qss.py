@@ -1,0 +1,5 @@
+qss = """
+QToolTip {
+    color: black
+}
+"""

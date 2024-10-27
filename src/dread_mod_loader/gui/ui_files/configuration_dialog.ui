@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ConfigurationDialog</class>
+ <widget class="QDialog" name="ConfigurationDialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>400</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>0</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Configuration</string>
+  </property>
+  <layout class="QVBoxLayout" name="main_layout">
+   <item>
+    <widget class="QTabWidget" name="configuration_tab_widget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="general_tab">
+      <attribute name="title">
+       <string>General</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="general_tab_layout">
+       <item>
+        <widget class="QScrollArea" name="general_scroll">
+         <property name="widgetResizable">
+          <bool>true</bool>
+         </property>
+         <widget class="QWidget" name="general_scroll_contents">
+          <property name="geometry">
+           <rect>
+            <x>0</x>
+            <y>0</y>
+            <width>458</width>
+            <height>332</height>
+           </rect>
+          </property>
+          <layout class="QVBoxLayout" name="general_scroll_contents_layout">
+           <item>
+            <layout class="QHBoxLayout" name="mods_dir_layout">
+             <item>
+              <widget class="QLabel" name="mods_dir_label">
+               <property name="text">
+                <string>Mods Directory</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="ValidatedLineEdit" name="mods_dir_line_edit"/>
+             </item>
+             <item>
+              <widget class="FileDialogButton" name="mods_dir_button">
+               <property name="text">
+                <string>Select Folder</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="theme_layout">
+             <item>
+              <widget class="QLabel" name="theme_label">
+               <property name="text">
+                <string>Theme</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="SavedComboBox" name="theme_combo_box">
+               <item>
+                <property name="text">
+                 <string>Auto</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Dark</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Light</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SavedComboBox</class>
+   <extends>QComboBox</extends>
+   <header>dread_mod_loader.gui.custom_widgets.saved_combo_box</header>
+  </customwidget>
+  <customwidget>
+   <class>ValidatedLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>dread_mod_loader.gui.custom_widgets.validated_line_edit</header>
+  </customwidget>
+  <customwidget>
+   <class>FileDialogButton</class>
+   <extends>QPushButton</extends>
+   <header>dread_mod_loader.gui.custom_widgets.file_dialog_button</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+ <slots>
+  <slot>update_theme()</slot>
+  <slot>show_mods_dialog()</slot>
+ </slots>
+</ui>
