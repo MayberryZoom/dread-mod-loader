@@ -4,12 +4,12 @@ import tomllib
 from importlib import import_module, reload
 from pathlib import Path
 
-from dread_mod_loader.assets import assets_path
+from dread_mod_loader import get_data_path
 from dread_mod_loader.gui.settings_dialog import SettingsDialog
 from dread_mod_loader.logger import LOG
 from dread_mod_loader.mod import DreadMod, JsonMod, ModInfo
 
-placeholder_thumbnail = assets_path() / "placeholder_thumbnail.png"
+placeholder_thumbnail = get_data_path() / "assets/placeholder_thumbnail.png"
 
 def import_class_from_module(module_name: str, class_name: str):
     """Imports a class from a module
