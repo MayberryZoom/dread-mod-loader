@@ -30,14 +30,14 @@ class ScrollableMarkdown(QScrollArea, Ui_ScrollableMarkdown):
         if markdown_path:
             self.load_markdown(markdown_path)
 
-    def add_text(self, text: str) -> None:
+    def _add_text(self, text: str) -> None:
         label = QLabel(text)
         label.setWordWrap(True)
         label.setTextFormat(Qt.TextFormat.MarkdownText)
 
         self.markdown_layout.addWidget(label)
 
-    def add_image(self, image_path: Path) -> None:
+    def _add_image(self, image_path: Path) -> None:
         image = QPixmap(image_path)
         image.scaledToWidth(500)
 
@@ -56,8 +56,8 @@ class ScrollableMarkdown(QScrollArea, Ui_ScrollableMarkdown):
 
                     image_path = Path(matches[2].replace("~assets~", str(get_data_path() / "assets")))
 
-                    self.add_text("\n".join(text))
-                    self.add_image(image_path)
+                    self._add_text("\n".join(text))
+                    self._add_image(image_path)
 
                     text = []
                 else:
@@ -65,4 +65,4 @@ class ScrollableMarkdown(QScrollArea, Ui_ScrollableMarkdown):
 
             # Add any remaining text
             if text:
-                self.add_text("\n".join(text))
+                self._add_text("\n".join(text))

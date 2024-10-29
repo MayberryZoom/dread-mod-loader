@@ -36,14 +36,14 @@ class ExportDialog(QDialog, Ui_ExportDialog):
         self.export_params = None
 
         # Set up general UI
-        self.export_combo_box.changed_callback = self.change_export_method
+        self.export_combo_box.changed_callback = self._change_export_method
         self.export_stacked_widget.setCurrentIndex(user_settings["default_export_combo_box"])
 
         # Set up Switch UI
         self.switch_tab.setCurrentIndex(user_settings["default_switch_method"])
 
-        self.ftp_anonymous_checkbox.clicked_callback = self.check_anonymous
-        self.check_anonymous(user_settings[self.ftp_anonymous_checkbox.setting_name])
+        self.ftp_anonymous_checkbox.clicked_callback = self._check_anonymous
+        self._check_anonymous(user_settings[self.ftp_anonymous_checkbox.setting_name])
 
         # Set up file dialog buttons
         self.input_romfs_button.line_edit = self.input_romfs_line_edit
@@ -65,10 +65,10 @@ class ExportDialog(QDialog, Ui_ExportDialog):
         ]
 
         for line_edit in validated_line_edits:
-            line_edit.update_callback = self.validate_export_options
+            line_edit.update_callback = self._validate_export_options
 
         # Validate default input
-        self.validate_export_options()
+        self._validate_export_options()
 
         # Initialize error dialog
         self.error_dialog = QErrorMessage(self)
@@ -76,17 +76,17 @@ class ExportDialog(QDialog, Ui_ExportDialog):
 
 # Special handling for specific widgets
 
-    def change_export_method(self, index: int) -> None:
+    def _change_export_method(self, index: int) -> None:
         self.export_stacked_widget.setCurrentIndex(index)
 
-        self.validate_export_options()
+        self._validate_export_options()
 
-    def change_switch_method(self, index: int) -> None:
+    def _change_switch_method(self, index: int) -> None:
         user_settings["default_switch_method"] = index
 
-        self.validate_export_options()
+        self._validate_export_options()
 
-    def check_anonymous(self, checked: bool) -> None:
+    def _check_anonymous(self, checked: bool) -> None:
         if checked:
             self.ftp_username_line_edit.setText("")
             self.ftp_username_line_edit.set_valid(True)
@@ -97,11 +97,11 @@ class ExportDialog(QDialog, Ui_ExportDialog):
         self.ftp_username_line_edit.setEnabled(not checked)
         self.ftp_password_line_edit.setEnabled(not checked)
 
-        self.validate_export_options()
+        self._validate_export_options()
 
 # User input validation
 
-    def validate_export_options(self) -> bool:
+    def _validate_export_options(self) -> bool:
         is_valid = True
         export_method = self.export_combo_box.currentText()
 
@@ -155,12 +155,12 @@ class ExportDialog(QDialog, Ui_ExportDialog):
 
 # Mod settings
 
-    def show_mod_settings(self) -> None:
+    def _show_mod_settings(self) -> None:
         self.settings_dialog.exec()
 
 # Export functions
 
-    def set_export_params(self) -> None:
+    def _set_export_params(self) -> None:
         export_method = self.export_combo_box.currentText()
         formatted_name = self.parent().name.replace(" ", "")
 
@@ -223,98 +223,100 @@ class ExportDialog(QDialog, Ui_ExportDialog):
                 output_format
             )
 
-    def export_button_pressed(self) -> None:
-        export_valid = self.validate_export_options()
+    def _export_button_pressed(self) -> None:
+        export_valid = self._validate_export_options()
 
         if not export_valid:
             self.export_button.setEnabled(False)
             return
 
         try:
-            self.set_export_params()
-
-            if self.export_params.ftp:
-                # FTP has an extra step, so the progress bar should increase less
-                progress_steps = 25
-                ftp_client = FTP()
-            else:
-                progress_steps = 33.33
-
-            self.export_progress.setValue(0)
-
-            self.export_label.setText("Starting")
-            LOG.info("Starting export")
-            self.parent().start(Path(self.input_romfs_line_edit.text()))
-            self.export_progress.setValue(round(progress_steps * 1))
-
-            self.export_label.setText("Patching")
-            LOG.info("Patching")
-            self.parent().patch()
-            self.export_progress.setValue(round(progress_steps * 2))
-
-            self.export_label.setText("Exporting")
-            LOG.info("Saving game modifications")
-            self.parent().export(self.export_params)
-            self.export_progress.setValue(round(progress_steps * 3))
-
-            if self.export_params.ftp:
-                self.export_label.setText("Uploading")
-                LOG.info("Uploading files")
-
-                try:
-                    ftp_client.connect(self.ftp_ip_line_edit.text(), int(self.ftp_port_line_edit.text()))
-
-                    if self.ftp_anonymous_checkbox.isChecked():
-                        ftp_client.login()
-                    else:
-                        ftp_client.login(self.ftp_username_line_edit.text(), self.ftp_password_line_edit.text())
-                except Exception:
-                    shutil.rmtree(temp_path, True)
-
-                    message_box = QMessageBox(
-                        title="",
-                        text=ftp_error_text,
-                        parent=self
-                    )
-
-                    if message_box.exec():
-                        self.export_label.setText("")
-                        self.export_progress.setValue(0)
-                        return
-
-                try:
-                    nlists = {}
-
-                    for file in temp_path.rglob("*"):
-                        relative_to_root = "/" + file.relative_to(temp_path).as_posix()
-                        parent_path = file.parent.relative_to(temp_path).as_posix()
-
-                        if parent_path not in nlists:
-                            nlists[relative_to_root] = ftp_client.nlst(parent_path)
-
-                        if file.is_file():
-                            if relative_to_root not in nlists[relative_to_root]:
-                                with file.open("rb") as file_buffer:
-                                    ftp_client.storbinary(f"STOR {relative_to_root}", file_buffer)
-                        else:
-                            if relative_to_root not in nlists[relative_to_root]:
-                                ftp_client.mkd(relative_to_root)
-                except Exception as e:
-                    LOG.error(e)
-                    raise e
-
-                ftp_client.quit()
-
-                shutil.rmtree(temp_path, True)
-
-
-            LOG.info("Export complete")
-            self.export_label.setText("Export complete")
-            self.export_progress.setValue(100)
-
+            self.export()
         except Exception as e:
             LOG.error(e)
             self.export_label.setText("")
             self.export_progress.setValue(0)
             self.error_dialog.showMessage("\n".join(format_exception(e)))
             raise e
+
+    def export(self) -> None:
+        self._set_export_params()
+
+        if self.export_params.ftp:
+            # FTP has an extra step, so the progress bar should increase less
+            progress_steps = 25
+            ftp_client = FTP()
+        else:
+            progress_steps = 33.33
+
+        self.export_progress.setValue(0)
+
+        self.export_label.setText("Starting")
+        LOG.info("Starting export")
+        self.parent().start(Path(self.input_romfs_line_edit.text()))
+        self.export_progress.setValue(round(progress_steps * 1))
+
+        self.export_label.setText("Patching")
+        LOG.info("Patching")
+        self.parent().patch()
+        self.export_progress.setValue(round(progress_steps * 2))
+
+        self.export_label.setText("Exporting")
+        LOG.info("Saving game modifications")
+        self.parent().export(self.export_params)
+        self.export_progress.setValue(round(progress_steps * 3))
+
+        if self.export_params.ftp:
+            self.export_label.setText("Uploading")
+            LOG.info("Uploading files")
+
+            try:
+                ftp_client.connect(self.ftp_ip_line_edit.text(), int(self.ftp_port_line_edit.text()))
+
+                if self.ftp_anonymous_checkbox.isChecked():
+                    ftp_client.login()
+                else:
+                    ftp_client.login(self.ftp_username_line_edit.text(), self.ftp_password_line_edit.text())
+            except Exception:
+                shutil.rmtree(temp_path, True)
+
+                message_box = QMessageBox(
+                    title="",
+                    text=ftp_error_text,
+                    parent=self
+                )
+
+                if message_box.exec():
+                    self.export_label.setText("")
+                    self.export_progress.setValue(0)
+                    return
+
+            try:
+                nlists = {}
+
+                for file in temp_path.rglob("*"):
+                    relative_to_root = "/" + file.relative_to(temp_path).as_posix()
+                    parent_path = file.parent.relative_to(temp_path).as_posix()
+
+                    if parent_path not in nlists:
+                        nlists[relative_to_root] = ftp_client.nlst(parent_path)
+
+                    if file.is_file():
+                        if relative_to_root not in nlists[relative_to_root]:
+                            with file.open("rb") as file_buffer:
+                                ftp_client.storbinary(f"STOR {relative_to_root}", file_buffer)
+                    else:
+                        if relative_to_root not in nlists[relative_to_root]:
+                            ftp_client.mkd(relative_to_root)
+            except Exception as e:
+                LOG.error(e)
+                raise e
+
+            ftp_client.quit()
+
+            shutil.rmtree(temp_path, True)
+
+
+        LOG.info("Export complete")
+        self.export_label.setText("Export complete")
+        self.export_progress.setValue(100)
