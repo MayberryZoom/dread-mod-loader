@@ -305,9 +305,9 @@ class DreadMod(QWidget, Ui_DreadMod):
             }
         }
 
-        delete_none_from_dict(config)
-        for key in config["SoundSystemATK"]:
-            config["SoundSystemATK"][key] /= 100
+        for key, value in config["SoundSystemATK"].items():
+            if value is not None:
+                config["SoundSystemATK"][key] /= 100
 
         to_update["config"] = config
 
