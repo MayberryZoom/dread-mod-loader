@@ -19,7 +19,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.refresh_mods()
 
         if not user_settings["seen_help"]:
-            self.show_help_dialog()
+            self._show_general_help()
 
             user_settings["seen_help"] = True
 
