@@ -55,7 +55,7 @@ user_settings_dir = Path(os.environ["APPDATA"] + "/Dread Mod Loader")
 
 default_settings = {
     # General
-    "mods_dir": Path("./mods").resolve().as_posix(),
+    "default_mods_dir_line_edit": Path("./mods").resolve().as_posix(),
     "seen_help": False,
 
     # Preferences

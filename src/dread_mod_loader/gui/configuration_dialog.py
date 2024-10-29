@@ -11,7 +11,6 @@ class ConfigurationDialog(QDialog, Ui_ConfigurationDialog):
         super().__init__(parent)
         self.setupUi(self)
 
-        self.mods_dir_line_edit.setting_name = "mods_dir"
         self.mods_dir_button.line_edit = self.mods_dir_line_edit
 
         self.theme_combo_box.changed_callback = self._update_theme
