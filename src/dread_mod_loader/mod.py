@@ -281,7 +281,9 @@ class DreadMod(QWidget, Ui_DreadMod):
 
     def apply_cosmetics(self, cosmetic_patches: dict) -> dict:
         to_update = {
-            "lua": {}
+            "lua": {
+                "camera_names_dict": {}
+            }
         }
 
         # Tunables
