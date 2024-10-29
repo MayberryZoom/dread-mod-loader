@@ -54,7 +54,9 @@ class UserSettings(dict):
 user_settings_dir = Path(os.environ["APPDATA"] + "/Dread Mod Loader")
 
 default_settings = {
+    # General
     "mods_dir": Path("./mods").resolve().as_posix(),
+    "seen_help": False,
 
     # Preferences
     "default_theme_combo_box": 0,

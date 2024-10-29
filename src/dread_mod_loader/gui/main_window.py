@@ -17,6 +17,11 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         self.refresh_mods()
 
+        if not user_settings["seen_help"]:
+            self.show_help_dialog()
+
+            user_settings["seen_help"] = True
+
     def refresh_mods(self) -> None:
         # Removing the mods in top down order causes weirdness, so reverse the range
         for i in reversed(range(self.mod_list_contents.layout().count())):
