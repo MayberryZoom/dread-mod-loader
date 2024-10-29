@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>HelpDialog</class>
- <widget class="QDialog" name="HelpDialog">
+ <class>MarkdownDialog</class>
+ <widget class="QDialog" name="MarkdownDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -25,9 +25,9 @@
   <property name="windowTitle">
    <string>Help</string>
   </property>
-  <layout class="QVBoxLayout" name="help_layout">
+  <layout class="QVBoxLayout" name="main_layout">
    <item>
-    <widget class="QTabWidget" name="help_tab_widget">
+    <widget class="QTabWidget" name="markdown_tab_widget">
      <property name="currentIndex">
       <number>-1</number>
      </property>

@@ -89,7 +89,8 @@
     <property name="title">
      <string>Help</string>
     </property>
-    <addaction name="help_action"/>
+    <addaction name="general_help_action"/>
+    <addaction name="developer_help_action"/>
    </widget>
    <addaction name="options_menu"/>
    <addaction name="help_menu"/>
@@ -99,9 +100,14 @@
     <string>Configuration</string>
    </property>
   </action>
-  <action name="help_action">
+  <action name="general_help_action">
    <property name="text">
-    <string>Help</string>
+    <string>General</string>
+   </property>
+  </action>
+  <action name="developer_help_action">
+   <property name="text">
+    <string>Developer</string>
    </property>
   </action>
  </widget>
@@ -140,10 +146,26 @@
    </hints>
   </connection>
   <connection>
-   <sender>help_action</sender>
+   <sender>general_help_action</sender>
    <signal>triggered()</signal>
    <receiver>MainWindow</receiver>
-   <slot>show_help_dialog()</slot>
+   <slot>_show_general_help()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>developer_help_action</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>_show_developer_help()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>-1</x>
@@ -159,6 +181,7 @@
  <slots>
   <slot>show_configuration_dialog()</slot>
   <slot>refresh_mods()</slot>
-  <slot>show_help_dialog()</slot>
+  <slot>_show_general_help()</slot>
+  <slot>_show_developer_help()</slot>
  </slots>
 </ui>
