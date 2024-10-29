@@ -85,11 +85,23 @@
     </property>
     <addaction name="configuration_action"/>
    </widget>
+   <widget class="QMenu" name="help_menu">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="help_action"/>
+   </widget>
    <addaction name="options_menu"/>
+   <addaction name="help_menu"/>
   </widget>
   <action name="configuration_action">
    <property name="text">
     <string>Configuration</string>
+   </property>
+  </action>
+  <action name="help_action">
+   <property name="text">
+    <string>Help</string>
    </property>
   </action>
  </widget>
@@ -127,9 +139,26 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>help_action</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>show_help_dialog()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>show_configuration_dialog()</slot>
   <slot>refresh_mods()</slot>
+  <slot>show_help_dialog()</slot>
  </slots>
 </ui>

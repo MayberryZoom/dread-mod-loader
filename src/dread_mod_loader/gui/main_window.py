@@ -1,9 +1,11 @@
 from pathlib import Path
 
+from PySide6.QtGui import Qt
 from PySide6.QtWidgets import QMainWindow
 
 from dread_mod_loader.gui.configuration_dialog import ConfigurationDialog
 from dread_mod_loader.gui.generated.main_window_ui import Ui_MainWindow
+from dread_mod_loader.gui.help_dialog import HelpDialog
 from dread_mod_loader.load_mods import load_mods
 from dread_mod_loader.settings import user_settings
 
@@ -28,3 +30,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def show_configuration_dialog(self) -> None:
         configuration_dialog = ConfigurationDialog(self)
         configuration_dialog.exec()
+
+    def show_help_dialog(self) -> None:
+        help_dialog = HelpDialog(self, Qt.WindowType.Window)
+        help_dialog.show()
