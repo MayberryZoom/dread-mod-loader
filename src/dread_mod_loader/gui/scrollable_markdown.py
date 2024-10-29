@@ -1,6 +1,7 @@
 from pathlib import Path
 from re import match
 from typing import overload
+
 from PySide6.QtGui import QPixmap, Qt
 from PySide6.QtWidgets import QLabel, QScrollArea, QWidget
 
@@ -51,7 +52,7 @@ class ScrollableMarkdown(QScrollArea, Ui_ScrollableMarkdown):
 
             for line in file.readlines():
                 if line.startswith("!"):
-                    matches = match("!\\[(.+)\\]\\((.+)\\)", line)
+                    matches = match(r"!\[(.+)\]\((.+)\)", line)
 
                     image_path = Path(matches[2].replace("~assets~", str(get_data_path() / "assets")))
 

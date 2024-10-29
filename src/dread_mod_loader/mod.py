@@ -236,7 +236,6 @@ class DreadMod(QWidget, Ui_DreadMod):
         self.default_settings = deepcopy(default_cosmetic_settings)
         self.disabled_settings = []
 
-
         if "all" in mod_info.disabled_settings:
             for setting_info in disabled_settings_info.values():
                 for setting in setting_info["settings"]:
