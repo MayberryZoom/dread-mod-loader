@@ -381,7 +381,7 @@ You probably want one of the other export methods.</string>
    <sender>export_button</sender>
    <signal>clicked()</signal>
    <receiver>ExportDialog</receiver>
-   <slot>export_button_pressed()</slot>
+   <slot>_export_button_pressed()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>389</x>
@@ -397,7 +397,7 @@ You probably want one of the other export methods.</string>
    <sender>switch_tab</sender>
    <signal>currentChanged(int)</signal>
    <receiver>ExportDialog</receiver>
-   <slot>change_switch_method()</slot>
+   <slot>_change_switch_method()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>199</x>
@@ -413,7 +413,7 @@ You probably want one of the other export methods.</string>
    <sender>mod_settings_button</sender>
    <signal>clicked()</signal>
    <receiver>ExportDialog</receiver>
-   <slot>show_mod_settings()</slot>
+   <slot>_show_mod_settings()</slot>
    <hints>
     <hint type="sourcelabel">
      <x>199</x>
@@ -427,8 +427,8 @@ You probably want one of the other export methods.</string>
   </connection>
  </connections>
  <slots>
-  <slot>export_button_pressed()</slot>
-  <slot>change_switch_method()</slot>
-  <slot>show_mod_settings()</slot>
+  <slot>_export_button_pressed()</slot>
+  <slot>_change_switch_method()</slot>
+  <slot>_show_mod_settings()</slot>
  </slots>
 </ui>
