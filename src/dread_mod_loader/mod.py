@@ -280,6 +280,12 @@ class DreadMod(QWidget, Ui_DreadMod):
         self.export_dialog.exec()
 
     def apply_cosmetics(self, cosmetic_patches: dict) -> dict:
+        """Apply the default cosmetic patches to a dict according to ODR JSON format.
+
+        Modifies the dict in-place. Deletes any items that are not None.
+
+        param cosmetic_patches: a dictionary to apply the cosmetics to
+        returns: the modified dict"""
         to_update = {
             "lua": {
                 "camera_names_dict": {}
@@ -324,9 +330,6 @@ class DreadMod(QWidget, Ui_DreadMod):
 
         # Shield covers
         shield_versions = {
-            # Since the value will be in the format of
-            # "diffusion_beam_radio_default" or "diffusion_beam_radio_alternate",
-            # the string needs to be split by underscores in order to grab only "default" or "alternate"
             "diffusion_beam": self.settings.get("default_diffusion_beam_radio_button_group", None),
             "ice_missile": self.settings.get("default_ice_missile_radio_button_group", None),
             "storm_missile": self.settings.get("default_storm_missile_radio_button_group", None),
@@ -336,6 +339,9 @@ class DreadMod(QWidget, Ui_DreadMod):
             "closed": self.settings.get("default_permanently_closed_radio_button_group", None),
         }
 
+        # Since the value will be in the format of
+        # "diffusion_beam_radio_default" or "diffusion_beam_radio_alternate",
+        # the string needs to be split by underscores in order to grab only "default" or "alternate"
         shield_versions = {key: value.split("_")[-1].upper()
                            for key, value
                            in shield_versions.items()
@@ -348,7 +354,8 @@ class DreadMod(QWidget, Ui_DreadMod):
 
     def add_assets(self, assets_path: Path) -> None:
         """Adds each file in assets_path to the mod
-        @param assets_path: The directory to add files from"""
+
+        param assets_path: The directory to add files from"""
         for asset in assets_path.rglob("*"):
             asset_name = asset.relative_to(assets_path).as_posix()
 
@@ -361,7 +368,8 @@ class DreadMod(QWidget, Ui_DreadMod):
         param input_path: a path to a Dread ROMFS"""
         self.input_path = input_path
         self.editor = PatcherEditor(self.input_path)
-        # Initializing this even though it's never used by default, just in case. Might mislead devs?
+        # To devs: LuaEditor modifications are NOT saved by default!
+        # In your patch() function, make sure to call self.lua_editor.save_modifications()!
         self.lua_editor = LuaEditor()
 
     def patch(self) -> None:
@@ -378,10 +386,6 @@ class DreadMod(QWidget, Ui_DreadMod):
 
         if export_params.output_format == OutputFormat.ROMFS:
             include_depackager(export_params.exefs_path)
-
-        # This causes issues if certain patches haven't been made, need a solution.
-        # Maybe this can be called by the dev at the end of patch()?
-        # self.lua_editor.save_modifications(self.editor)
 
         self.editor.flush_modified_assets()
 
@@ -405,7 +409,7 @@ class JsonMod(DreadMod):
         # ODR will insert values into the configuration while patching, so if the configuration isn't copied,
         # trying to export again will fail schema validation
         configuration = deepcopy(self.configuration)
-        self.apply_cosmetics(self.configuration["cosmetic_patches"])
+        self.apply_cosmetics(configuration["cosmetic_patches"])
 
         apply_patches(self.editor, self.lua_editor, configuration)
 
