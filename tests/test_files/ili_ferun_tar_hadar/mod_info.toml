@@ -2,7 +2,6 @@ identifier = "ili_ferun_tar_hadar"
 
 patch_type = "json"
 patch_file = "ili_ferun_tar_hadar.json"
-patch_class = "IliFerunTarHadar"
 
 name = "Ili Ferun tar Hadar"
 author = "Mayberry"

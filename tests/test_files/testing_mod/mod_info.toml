@@ -1,19 +1,17 @@
-identifier = "testing_mod"
+identifier = "developer.my_mod"
 
 patch_type = "py"
 patch_file = "mod.py"
 patch_class = "MyMod"
 
-settings_dialog_file = "settings.py"
-settings_dialog_class = "MySettings"
-
-assets_path = "/assets"
-
-name = "Testing Mod"
-author = "Dread Mod Loader"
+name = "My Mod"
+author = "Developer"
 version = "0.0.0"
 description = "Mod description goes here"
 thumbnail = "thumbnail.png"
+
+settings_dialog_file = "settings.py"
+settings_dialog_class = "MySettings"
 
 [default_settings]
 default_test_checkbox = false
