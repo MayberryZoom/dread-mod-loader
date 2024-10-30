@@ -71,3 +71,31 @@ disabled_settings = [
     "door"
 ]
 ```
+
+It's also possible to change the default settings for a mod. This is done by creating a new toml section, `default_settings`, then assigning a value to each one. Note that this field uses the actual names stored in settings, rather than a separate set of IDs, so they'll be in the format of `default_<setting>_<element>`, i.e. `default_diffusion_beam_radio_button_group = diffusion_beam_radio_alternate`.
+
+Let's say we want to default the music volume to 50% and the death counter to on:
+
+```toml
+identifier = "developer.my_mod"
+
+patch_type = "json"
+patch_file = "patcher.json"
+
+name = "My Mod"
+author = "Developer"
+version = "1.0.0"
+description = "This is my first mod"
+thumbnail = "thumbnail.png"
+
+disabled_settings = [
+    "boss_lifebar",
+    "door"
+]
+
+[default_settings]
+default_death_counter_checkbox = true
+default_music_slider = 50
+```
+
+Creating a custom settings menu will be explained in a later guide.

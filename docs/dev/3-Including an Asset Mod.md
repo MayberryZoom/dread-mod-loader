@@ -30,6 +30,10 @@ disabled_settings = [
     "boss_lifebar",
     "door"
 ]
+
+[default_settings]
+default_death_counter_checkbox = true
+default_music_slider = 50
 ```
 
 Now, when the mod is exported, these files will automatically be included in the mod, applied last.
