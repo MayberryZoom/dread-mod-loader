@@ -92,6 +92,13 @@
     <addaction name="general_help_action"/>
     <addaction name="developer_help_action"/>
    </widget>
+   <widget class="QMenu" name="open_menu">
+    <property name="title">
+     <string>Open</string>
+    </property>
+    <addaction name="mods_dir_action"/>
+   </widget>
+   <addaction name="open_menu"/>
    <addaction name="options_menu"/>
    <addaction name="help_menu"/>
   </widget>
@@ -108,6 +115,11 @@
   <action name="developer_help_action">
    <property name="text">
     <string>Developer</string>
+   </property>
+  </action>
+  <action name="mods_dir_action">
+   <property name="text">
+    <string>Mods Directory</string>
    </property>
   </action>
  </widget>
@@ -177,11 +189,28 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>mods_dir_action</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>_open_mods_dir()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>399</x>
+     <y>299</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>show_configuration_dialog()</slot>
   <slot>refresh_mods()</slot>
   <slot>_show_general_help()</slot>
   <slot>_show_developer_help()</slot>
+  <slot>_open_mods_dir()</slot>
  </slots>
 </ui>

@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from PySide6.QtGui import Qt
@@ -32,6 +33,10 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
         for mod_name, mod in mods.items():
             self.mod_list_contents.layout().addWidget(mod)
+
+    def _open_mods_dir(self) -> None:
+        mods_dir = os.path.realpath(user_settings["default_mods_dir_line_edit"])
+        os.startfile(mods_dir)
 
     def show_configuration_dialog(self) -> None:
         configuration_dialog = ConfigurationDialog(self)
