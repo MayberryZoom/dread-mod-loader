@@ -9,6 +9,7 @@ A mod can include custom assets to replace existing ones. To do this, a new fold
 |           |__ s_aqua_002.dspadpcm.bfstm
 |__ mod_info.toml
 |__ patcher.json
+|__ thumbnail.png
 ```
 
 The path to this folder should then be set in the toml, like so:
