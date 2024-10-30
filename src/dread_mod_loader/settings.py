@@ -65,7 +65,7 @@ default_settings = {
     # Export window
     "default_export_combo_box": 0,
     "default_input_romfs_line_edit": "",
-    "default_ryujinx_path_line_edit": Path(os.environ["APPDATA"] + "\\Ryujinx").as_posix(),
+    "default_ryujinx_path_line_edit": Path(os.environ["APPDATA"] + r"\Ryujinx\mods\contents\010093801237C000").as_posix(),
     "default_switch_method": 0,
     "default_smm_checkbox": True,
     "default_ftp_ip_line_edit": "",

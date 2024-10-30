@@ -117,12 +117,7 @@ class ExportDialog(QDialog, Ui_ExportDialog):
 
         # Ryujinx checks
         if export_method == "Ryujinx":
-            ryujinx_files_to_check = [
-                "system/prod.keys",
-                "bis",
-            ]
-
-            if not self.ryujinx_path_line_edit.validate_files(ryujinx_files_to_check):
+            if not self.ryujinx_path_line_edit.validate_not_empty():
                 is_valid = False
 
         # Switch checks
@@ -166,7 +161,7 @@ class ExportDialog(QDialog, Ui_ExportDialog):
 
         # Ryujinx
         if export_method == "Ryujinx":
-            mod_dir = Path(self.ryujinx_path_line_edit.text()) / "mods/contents/010093801237C000" / formatted_name
+            mod_dir = Path(self.ryujinx_path_line_edit.text()) / formatted_name
 
             self.export_params = ExportParams(
                 mod_dir / "romfs",
