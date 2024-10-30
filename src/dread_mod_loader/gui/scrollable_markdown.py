@@ -34,6 +34,7 @@ class ScrollableMarkdown(QScrollArea, Ui_ScrollableMarkdown):
         label = QLabel(text)
         label.setWordWrap(True)
         label.setTextFormat(Qt.TextFormat.MarkdownText)
+        label.setAlignment(Qt.AlignmentFlag.AlignTop)
 
         self.markdown_layout.addWidget(label)
 
