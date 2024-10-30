@@ -11,3 +11,5 @@ After creating this folder, head over to the configuration window and select it 
 ![The path to the mods folder is in the "Mods Directory" text box in the configuration window.](~assets~/0-2.png)
 
 Next, head back to the main window, then double click on any of your installed mods to export them.
+
+**Before going further, it's highly recommended to be aware of the risks of running DML mods**. Please head to the Safety tab to learn more.
