@@ -9,6 +9,7 @@ from PySide6.QtWidgets import QApplication
 from dread_mod_loader.gui.main_window import MainWindow
 from dread_mod_loader.qss import qss
 from dread_mod_loader.settings import user_settings
+from dread_mod_loader.version import version
 
 themes = ["auto", "dark", "light"]
 
@@ -19,7 +20,7 @@ shutil.rmtree(Path("temp"), True)
 app = QApplication(sys.argv)
 
 window = MainWindow()
-window.setWindowTitle("Dread Mod Loader v0.0.0")
+window.setWindowTitle("Dread Mod Loader v" + version)
 window.show()
 
 qdarktheme.setup_theme(themes[user_settings["default_theme_combo_box"]], additional_qss=qss)
