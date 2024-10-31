@@ -52,6 +52,7 @@ class UserSettings(dict):
 
 # General settings
 user_settings_dir = Path(os.environ["APPDATA"] + "/Dread Mod Loader")
+ryujinx_mods_dir = Path(os.environ["APPDATA"] + r"\Ryujinx\mods\contents\010093801237C000").as_posix()
 
 default_settings = {
     # General
@@ -65,7 +66,7 @@ default_settings = {
     # Export window
     "default_export_combo_box": 0,
     "default_input_romfs_line_edit": "",
-    "default_ryujinx_path_line_edit": Path(os.environ["APPDATA"] + r"\Ryujinx\mods\contents\010093801237C000").as_posix(),
+    "default_ryujinx_path_line_edit": ryujinx_mods_dir,
     "default_switch_method": 0,
     "default_smm_checkbox": True,
     "default_ftp_ip_line_edit": "",
