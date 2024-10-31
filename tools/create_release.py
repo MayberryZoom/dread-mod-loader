@@ -1,9 +1,12 @@
 from os import chdir
 from shutil import make_archive
+from subprocess import call
 
 from PyInstaller.__main__ import run
 
 from dread_mod_loader.version import version
+
+call(r"tools\build_ui.bat")
 
 run([
     "src/dread_mod_loader/__main__.py",
