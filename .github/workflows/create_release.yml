@@ -34,14 +34,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: "release"
-          path: dist
+          path: dist/
           if-no-files-found: error
 
       - name: Download Artifact
         uses: actions/download-artifact@v4
         with:
           name: "release"
-          path: dist
+          path: dist/
 
       - name: Create Release
         uses: svenstaro/upload-release-action@v2
