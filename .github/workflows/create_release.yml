@@ -26,12 +26,6 @@ jobs:
         run:
           py tools\create_release.py
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          path: dist
-          if-no-files-found: error
-
       - name: Create Release
         uses: svenstaro/upload-release-action@v2
         with:
