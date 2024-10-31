@@ -51,4 +51,3 @@ jobs:
           file: dist/*
           file_glob: true
           overwrite: true
-          draft: true
