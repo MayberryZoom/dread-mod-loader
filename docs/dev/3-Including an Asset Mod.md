@@ -9,6 +9,7 @@ A mod can include custom assets to replace existing ones. To do this, a new fold
 |           |__ s_aqua_002.dspadpcm.bfstm
 |__ mod_info.toml
 |__ patcher.json
+|__ README.md
 |__ thumbnail.png
 ```
 
@@ -23,6 +24,7 @@ name = "My Mod"
 author = "Developer"
 version = "1.0.0"
 description = "This is my first mod"
+readme_path = "README.md"
 thumbnail = "thumbnail.png"
 
 assets_path = "assets"

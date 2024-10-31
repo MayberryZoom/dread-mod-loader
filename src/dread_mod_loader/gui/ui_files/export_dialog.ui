@@ -6,77 +6,61 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>374</height>
+    <width>500</width>
+    <height>420</height>
    </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>500</width>
+    <height>420</height>
+   </size>
   </property>
   <property name="windowTitle">
    <string>Export</string>
   </property>
   <layout class="QVBoxLayout" name="export_dialog_layout">
    <item>
-    <layout class="QHBoxLayout" name="input_romfs_layout">
-     <item>
-      <widget class="ValidatedLineEdit" name="input_romfs_line_edit">
-       <property name="placeholderText">
-        <string>Path to ROMFS</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="FileDialogButton" name="input_romfs_button">
-       <property name="text">
-        <string>Select Folder</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <widget class="SavedComboBox" name="export_combo_box">
-     <item>
-      <property name="text">
-       <string>Ryujinx</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Switch</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Advanced</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item>
-    <widget class="QStackedWidget" name="export_stacked_widget">
+    <widget class="QTabWidget" name="tab_widget">
      <property name="currentIndex">
-      <number>0</number>
+      <number>1</number>
      </property>
-     <widget class="QWidget" name="ryujinx">
-      <layout class="QVBoxLayout" name="verticalLayout">
+     <widget class="QWidget" name="info_tab">
+      <attribute name="title">
+       <string>Info</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="info_layout">
        <item>
-        <widget class="QLabel" name="ryujinx_info_label">
+        <widget class="QLabel" name="info_header">
          <property name="text">
-          <string>Export the mod for Ryujinx.
-Please select your Metroid Dread mods folder.</string>
+          <string>Mod Header</string>
+         </property>
+         <property name="textFormat">
+          <enum>Qt::TextFormat::MarkdownText</enum>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignmentFlag::AlignCenter</set>
          </property>
         </widget>
        </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="export_tab">
+      <attribute name="title">
+       <string>Export</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QHBoxLayout" name="ryujinx_path_layout">
+        <layout class="QHBoxLayout" name="input_romfs_layout">
          <item>
-          <widget class="ValidatedLineEdit" name="ryujinx_path_line_edit">
+          <widget class="ValidatedLineEdit" name="input_romfs_line_edit">
            <property name="placeholderText">
-            <string>Path to Ryujinx</string>
+            <string>Path to ROMFS</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="FileDialogButton" name="ryujinx_path_button">
+          <widget class="FileDialogButton" name="input_romfs_button">
            <property name="text">
             <string>Select Folder</string>
            </property>
@@ -84,267 +68,324 @@ Please select your Metroid Dread mods folder.</string>
          </item>
         </layout>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="switch">
-      <layout class="QVBoxLayout" name="verticalLayout_3">
        <item>
-        <widget class="QTabWidget" name="switch_tab">
+        <widget class="SavedComboBox" name="export_combo_box">
+         <item>
+          <property name="text">
+           <string>Ryujinx</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Switch</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Advanced</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item>
+        <widget class="QStackedWidget" name="export_stacked_widget">
          <property name="currentIndex">
           <number>0</number>
          </property>
-         <widget class="QWidget" name="ftp">
-          <attribute name="title">
-           <string>FTP</string>
-          </attribute>
-          <layout class="QGridLayout" name="gridLayout">
-           <item row="3" column="2">
-            <widget class="ValidatedLineEdit" name="ftp_password_line_edit">
-             <property name="placeholderText">
-              <string>Password</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1">
-            <widget class="ValidatedLineEdit" name="ftp_username_line_edit">
-             <property name="placeholderText">
-              <string>Username</string>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="0" colspan="3">
-            <widget class="QLabel" name="ftp_info_label">
+         <widget class="QWidget" name="ryujinx">
+          <layout class="QVBoxLayout" name="verticalLayout">
+           <item>
+            <widget class="QLabel" name="ryujinx_info_label">
              <property name="text">
-              <string>Export the mod to your Switch wirelessly using FTP.
+              <string>Export the mod for Ryujinx.
+Please select your Metroid Dread mods folder.</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="ryujinx_path_layout">
+             <item>
+              <widget class="ValidatedLineEdit" name="ryujinx_path_line_edit">
+               <property name="placeholderText">
+                <string>Path to Ryujinx</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="FileDialogButton" name="ryujinx_path_button">
+               <property name="text">
+                <string>Select Folder</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="switch">
+          <layout class="QVBoxLayout" name="verticalLayout_3">
+           <item>
+            <widget class="QTabWidget" name="switch_tab">
+             <property name="currentIndex">
+              <number>0</number>
+             </property>
+             <widget class="QWidget" name="ftp">
+              <attribute name="title">
+               <string>FTP</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout">
+               <item row="3" column="2">
+                <widget class="ValidatedLineEdit" name="ftp_password_line_edit">
+                 <property name="placeholderText">
+                  <string>Password</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="3" column="1">
+                <widget class="ValidatedLineEdit" name="ftp_username_line_edit">
+                 <property name="placeholderText">
+                  <string>Username</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="1" column="0" colspan="3">
+                <widget class="QLabel" name="ftp_info_label">
+                 <property name="text">
+                  <string>Export the mod to your Switch wirelessly using FTP.
 Your Switch will need a homebrew FTP client.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="5" column="1">
+                <widget class="SavedCheckBox" name="ftp_anonymous_checkbox">
+                 <property name="text">
+                  <string>Anonymous</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="1">
+                <widget class="ValidatedLineEdit" name="ftp_ip_line_edit">
+                 <property name="placeholderText">
+                  <string>IP</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="2">
+                <widget class="ValidatedLineEdit" name="ftp_port_line_edit">
+                 <property name="placeholderText">
+                  <string>Port</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+             <widget class="QWidget" name="usb">
+              <attribute name="title">
+               <string>USB</string>
+              </attribute>
+              <layout class="QGridLayout" name="gridLayout_2">
+               <item row="1" column="0" colspan="2">
+                <widget class="QLabel" name="usb_info_label">
+                 <property name="text">
+                  <string>Export the mod to your Switch using USB.</string>
+                 </property>
+                </widget>
+               </item>
+               <item row="2" column="0" colspan="2">
+                <widget class="USBComboBox" name="usb_combo_box"/>
+               </item>
+              </layout>
+             </widget>
+            </widget>
+           </item>
+           <item>
+            <widget class="SavedCheckBox" name="smm_checkbox">
+             <property name="text">
+              <string>Export for SimpleModManager (highly recommended)</string>
+             </property>
+             <property name="checked">
+              <bool>true</bool>
              </property>
             </widget>
            </item>
-           <item row="5" column="1">
-            <widget class="SavedCheckBox" name="ftp_anonymous_checkbox">
+          </layout>
+         </widget>
+         <widget class="QWidget" name="advanced">
+          <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="0" colspan="2">
+            <widget class="QLabel" name="advanced_info_label">
              <property name="text">
-              <string>Anonymous</string>
+              <string>Export the mod to a specific directory, using the specified options.
+Intended for advanced use only.
+You probably want one of the other export methods.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="FileDialogButton" name="advanced_romfs_button">
+             <property name="text">
+              <string>Select Folder</string>
              </property>
             </widget>
            </item>
            <item row="2" column="1">
-            <widget class="ValidatedLineEdit" name="ftp_ip_line_edit">
-             <property name="placeholderText">
-              <string>IP</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="ValidatedLineEdit" name="ftp_port_line_edit">
-             <property name="placeholderText">
-              <string>Port</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
-         </widget>
-         <widget class="QWidget" name="usb">
-          <attribute name="title">
-           <string>USB</string>
-          </attribute>
-          <layout class="QGridLayout" name="gridLayout_2">
-           <item row="1" column="0" colspan="2">
-            <widget class="QLabel" name="usb_info_label">
+            <widget class="FileDialogButton" name="advanced_exefs_button">
              <property name="text">
-              <string>Export the mod to your Switch using USB.</string>
+              <string>Select Folder</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="0" colspan="2">
-            <widget class="USBComboBox" name="usb_combo_box"/>
+           <item row="1" column="0">
+            <widget class="ValidatedLineEdit" name="advanced_romfs_line_edit">
+             <property name="placeholderText">
+              <string>Path to output ROMFS</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="FileDialogButton" name="advanced_exefs_patches_button">
+             <property name="text">
+              <string>Select Folder</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="ValidatedLineEdit" name="advanced_exefs_line_edit">
+             <property name="placeholderText">
+              <string>Path to output EXEFS</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="ValidatedLineEdit" name="advanced_exefs_patches_line_edit">
+             <property name="placeholderText">
+              <string>Path to output EXEFS patches</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="SavedComboBox" name="advanced_format_combo_box">
+             <property name="placeholderText">
+              <string>Output format</string>
+             </property>
+             <item>
+              <property name="text">
+               <string>ROMFS</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>PKG</string>
+              </property>
+             </item>
+            </widget>
            </item>
           </layout>
          </widget>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignmentFlag::AlignHCenter">
+        <widget class="QPushButton" name="mod_settings_button">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>275</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>275</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="baseSize">
+          <size>
+           <width>275</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Mod Settings</string>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="SavedCheckBox" name="smm_checkbox">
-         <property name="text">
-          <string>Export for SimpleModManager (highly recommended)</string>
+        <spacer name="mod_settings_spacer">
+         <property name="orientation">
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
-         <property name="checked">
-          <bool>true</bool>
+         <property name="sizeType">
+          <enum>QSizePolicy::Policy::Minimum</enum>
          </property>
-        </widget>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>5</width>
+           <height>5</height>
+          </size>
+         </property>
+        </spacer>
        </item>
-      </layout>
-     </widget>
-     <widget class="QWidget" name="advanced">
-      <layout class="QGridLayout" name="gridLayout_3">
-       <item row="0" column="0" colspan="2">
-        <widget class="QLabel" name="advanced_info_label">
-         <property name="text">
-          <string>Export the mod to a specific directory, using the specified options. Intended for advanced use only.
-You probably want one of the other export methods.</string>
-         </property>
-         <property name="wordWrap">
-          <bool>true</bool>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="FileDialogButton" name="advanced_romfs_button">
-         <property name="text">
-          <string>Select Folder</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="1">
-        <widget class="FileDialogButton" name="advanced_exefs_button">
-         <property name="text">
-          <string>Select Folder</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="ValidatedLineEdit" name="advanced_romfs_line_edit">
-         <property name="placeholderText">
-          <string>Path to output ROMFS</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="1">
-        <widget class="FileDialogButton" name="advanced_exefs_patches_button">
-         <property name="text">
-          <string>Select Folder</string>
-         </property>
-        </widget>
-       </item>
-       <item row="2" column="0">
-        <widget class="ValidatedLineEdit" name="advanced_exefs_line_edit">
-         <property name="placeholderText">
-          <string>Path to output EXEFS</string>
-         </property>
-        </widget>
-       </item>
-       <item row="3" column="0">
-        <widget class="ValidatedLineEdit" name="advanced_exefs_patches_line_edit">
-         <property name="placeholderText">
-          <string>Path to output EXEFS patches</string>
-         </property>
-        </widget>
-       </item>
-       <item row="4" column="0" colspan="2">
-        <widget class="SavedComboBox" name="advanced_format_combo_box">
-         <property name="placeholderText">
-          <string>Output format</string>
-         </property>
+       <item>
+        <layout class="QHBoxLayout" name="export_layout">
          <item>
-          <property name="text">
-           <string>ROMFS</string>
-          </property>
+          <widget class="QProgressBar" name="export_progress">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="value">
+            <number>0</number>
+           </property>
+          </widget>
          </item>
          <item>
-          <property name="text">
-           <string>PKG</string>
-          </property>
+          <widget class="QLabel" name="export_label">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
          </item>
-        </widget>
+         <item>
+          <widget class="QPushButton" name="export_button">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Export</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
        </item>
       </layout>
      </widget>
     </widget>
-   </item>
-   <item alignment="Qt::AlignmentFlag::AlignHCenter">
-    <widget class="QPushButton" name="mod_settings_button">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>275</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>275</width>
-       <height>16777215</height>
-      </size>
-     </property>
-     <property name="baseSize">
-      <size>
-       <width>275</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Mod Settings</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <spacer name="mod_settings_spacer">
-     <property name="orientation">
-      <enum>Qt::Orientation::Vertical</enum>
-     </property>
-     <property name="sizeType">
-      <enum>QSizePolicy::Policy::Minimum</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>5</width>
-       <height>5</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item>
-    <layout class="QHBoxLayout" name="export_layout">
-     <item>
-      <widget class="QProgressBar" name="export_progress">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>100</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="value">
-        <number>0</number>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="export_label">
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="export_button">
-       <property name="minimumSize">
-        <size>
-         <width>100</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>100</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Export</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
    </item>
   </layout>
  </widget>

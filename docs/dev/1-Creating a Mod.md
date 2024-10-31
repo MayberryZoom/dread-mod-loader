@@ -39,7 +39,24 @@ version = "1.0.0"
 description = "This is my first mod"
 ```
 
-All of these will be displayed in the mod list in the main window. If they aren't provided, they will default to "Unkown".
+All of these will be displayed in the mod list in the main window. If they aren't provided, they will default to "Unkown". Note that if this description is too long, it'll get cut off. This field should be used for a short summary about the mod.
+
+When the user exports the mod, they'll first be presented with a screen showing info about the mod. This window is where we can provide the user with a longer description about the mod. We'll do this by putting a path to a markdown file in our toml:
+
+```toml
+identifier = "developer.my_mod"
+
+patch_type = "json"
+patch_file = "patcher.json"
+
+name = "My Mod"
+author = "Developer"
+version = "1.0.0"
+description = "This is my first mod"
+readme_path = "README.md"
+```
+
+The contents of this file will be loaded into the export window when the user double clicks on the mod. This file can be as long as you want; a scroll bar will be added automatically. If this path isn't provided, the export window will instead display the description.
 
 We can also define a custom thumbnail for our mod, to  be displayed in the mod list as well. Like the patch file, this is a relative path:
 
@@ -53,6 +70,7 @@ name = "My Mod"
 author = "Developer"
 version = "1.0.0"
 description = "This is my first mod"
+readme_path = "README.md"
 thumbnail = "thumbnail.png"
 ```
 

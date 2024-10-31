@@ -38,6 +38,11 @@ def load_mod(mod_path: Path) -> DreadMod:
 
         patch_type = mod_config["patch_type"]
 
+        if "readme_path" in mod_config:
+            readme = mod_path / mod_config["readme_path"]
+        else:
+            readme = mod_config.get("description", "No description.")
+
         if "thumbnail" in mod_config:
             mod_thumbnail = mod_path / mod_config["thumbnail"]
         else:
@@ -62,6 +67,7 @@ def load_mod(mod_path: Path) -> DreadMod:
             mod_config.get("author", "Unknown"),
             mod_config.get("version", "Unknown"),
             mod_config.get("description", "No description."),
+            readme,
             mod_thumbnail,
             mod_path,
             assets_path,

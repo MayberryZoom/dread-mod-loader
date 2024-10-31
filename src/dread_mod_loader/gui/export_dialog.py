@@ -7,6 +7,7 @@ from mercury_engine_data_structures.file_tree_editor import OutputFormat
 from PySide6.QtWidgets import QDialog, QErrorMessage, QMessageBox, QWidget
 
 from dread_mod_loader.gui.generated.export_dialog_ui import Ui_ExportDialog
+from dread_mod_loader.gui.scrollable_markdown import ScrollableMarkdown
 from dread_mod_loader.logger import LOG
 from dread_mod_loader.settings import UserSettings, user_settings
 
@@ -26,10 +27,23 @@ class ExportParams:
         self.ftp = ftp
 
 class ExportDialog(QDialog, Ui_ExportDialog):
-    def __init__(self, settings: UserSettings, settings_dialog_class,
+    def __init__(self, readme: Path | str, settings: UserSettings, settings_dialog_class,
                  disabled_settings: list[str], parent: QWidget) -> None:
         super().__init__(parent)
         self.setupUi(self)
+
+        info_header_text = f"**{parent.name}**\n\nby {parent.author}"
+        self.info_header.setText(info_header_text)
+
+        # If readme is a path to a markdown file, pass that to the widget,
+        # otherwise add the provided str directly
+        if isinstance(readme, Path):
+            self.info_scroll = ScrollableMarkdown(readme, self)
+        else:
+            self.info_scroll = ScrollableMarkdown(self)
+            self.info_scroll.add_text(readme)
+
+        self.info_layout.addWidget(self.info_scroll)
 
         self.settings = settings
         self.settings_dialog = settings_dialog_class(self, self.settings, disabled_settings)

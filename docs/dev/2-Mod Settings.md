@@ -64,6 +64,7 @@ name = "My Mod"
 author = "Developer"
 version = "1.0.0"
 description = "This is my first mod"
+readme_path = "README.md"
 thumbnail = "thumbnail.png"
 
 disabled_settings = [
@@ -86,6 +87,7 @@ name = "My Mod"
 author = "Developer"
 version = "1.0.0"
 description = "This is my first mod"
+readme_path = "README.md"
 thumbnail = "thumbnail.png"
 
 disabled_settings = [

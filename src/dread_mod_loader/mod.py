@@ -203,15 +203,16 @@ def delete_none_from_dict(dct) -> dict:
 
 
 class ModInfo:
-    def __init__(self, identifier: str, name: str, author: str, version: str, description: str, thumbnail: Path,
-                 mod_path: Path, assets_path: Path, settings_dialog_class: QDialog, default_settings: dict,
-                 disabled_settings: list = []) -> None:
+    def __init__(self, identifier: str, name: str, author: str, version: str, description: str, readme: Path | str,
+                 thumbnail: Path, mod_path: Path, assets_path: Path, settings_dialog_class: QDialog,
+                 default_settings: dict, disabled_settings: list = []) -> None:
         self.identifier = identifier
         self.name = name
         self.author = author
         self.version = version
         self.description = description
         self.thumbnail = thumbnail
+        self.readme = readme
         self.mod_path = mod_path
         self.assets_path = assets_path
         self.settings_dialog_class = settings_dialog_class
@@ -229,6 +230,7 @@ class DreadMod(QWidget, Ui_DreadMod):
         self.author = mod_info.author
         self.version = mod_info.version
         self.description = mod_info.description
+        self.readme = mod_info.readme
         self.thumbnail = mod_info.thumbnail
         self.mod_path = mod_info.mod_path
         self.assets_path = mod_info.assets_path
@@ -271,6 +273,7 @@ class DreadMod(QWidget, Ui_DreadMod):
 
     def show_export_dialog(self) -> None:
         self.export_dialog = ExportDialog(
+            self.readme,
             self.settings,
             self.settings_dialog_class,
             self.disabled_settings,
