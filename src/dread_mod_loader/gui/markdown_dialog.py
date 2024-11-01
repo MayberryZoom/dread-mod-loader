@@ -14,6 +14,6 @@ class MarkdownDialog(QDialog, Ui_MarkdownDialog):
 
         self.setupUi(self)
 
-        for doc_path in docs_path.glob("*"):
+        for doc_path in docs_path.glob("*.md"):
             tab_name = sub(r"\d+-", "", doc_path.stem)
             self.markdown_tab_widget.addTab(ScrollableMarkdown(doc_path), tab_name)

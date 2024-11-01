@@ -55,7 +55,7 @@ class ScrollableMarkdown(QScrollArea, Ui_ScrollableMarkdown):
                 if line.startswith("!"):
                     matches = match(r"!\[(.+)\]\((.+)\)", line)
 
-                    image_path = Path(matches[2].replace("~assets~", str(get_data_path() / "assets")))
+                    image_path = md_path.parent / matches[2]
 
                     self.add_text("\n".join(text))
                     self.add_image(image_path)
