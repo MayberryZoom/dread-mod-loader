@@ -29,9 +29,9 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         for i in reversed(range(self.mod_list_contents.layout().count())):
             self.mod_list_contents.layout().itemAt(i).widget().setParent(None)
 
-        mods = load_mods(Path(user_settings["default_mods_dir_line_edit"]))
+        self.mods = load_mods(Path(user_settings["default_mods_dir_line_edit"]))
 
-        for mod_name, mod in mods.items():
+        for mod_name, mod in self.mods.items():
             self.mod_list_contents.layout().addWidget(mod)
 
     def _open_mods_dir(self) -> None:
