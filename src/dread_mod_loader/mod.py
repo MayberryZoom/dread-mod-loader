@@ -192,14 +192,20 @@ default_cosmetic_settings = {
     "default_permanently_closed_radio_button_group": "permanently_closed_radio_default",
 }
 
-def delete_none_from_dict(dct) -> dict:
-    for key, value in list(dct.items()):
-        if isinstance(value, dict):
-            delete_none_from_dict(value)
-        elif value is None:
-            del dct[key]
+def nested_update_remove_none(to_update: dict, update_with: dict) -> dict:
+    for key, value in list(update_with.items()):
+        if key not in to_update:
+            to_update[key] = value
 
-    return dct
+        if isinstance(value, dict):
+            to_update[key].update(nested_update_remove_none(value, to_update[key]))
+            if len(value) == 0:
+                del to_update[key]
+        elif value is None:
+            del update_with[key]
+
+    to_update.update(update_with)
+    return to_update
 
 
 class ModInfo:
@@ -291,8 +297,11 @@ class DreadMod(QWidget, Ui_DreadMod):
         returns: the modified dict"""
         to_update = {
             "lua": {
-                "camera_names_dict": {}
-            }
+                "camera_names_dict": {},
+                "custom_init": {
+                    "enable_death_counter": self.settings.get("default_death_counter_checkbox", None),
+                },
+            },
         }
 
         # Tunables
@@ -321,15 +330,9 @@ class DreadMod(QWidget, Ui_DreadMod):
         to_update["config"] = config
 
         # Custom init
-        custom_init = {
-            "enable_death_counter": self.settings.get("default_death_counter_checkbox", None),
-        }
-
         room_names_index = self.settings.get("default_room_names_combo_box", None)
         if room_names_index is not None:
-            custom_init["enable_room_name_display"] = room_names[room_names_index]
-
-        to_update["lua"]["custom_init"] = custom_init
+            to_update["lua"]["custom_init"]["enable_room_name_display"] = room_names[room_names_index]
 
         # Shield covers
         shield_versions = {
@@ -352,7 +355,7 @@ class DreadMod(QWidget, Ui_DreadMod):
 
         to_update["shield_versions"] = shield_versions
 
-        cosmetic_patches.update(delete_none_from_dict(to_update))
+        nested_update_remove_none(cosmetic_patches, to_update)
         return cosmetic_patches
 
     def add_assets(self, assets_path: Path) -> None:
