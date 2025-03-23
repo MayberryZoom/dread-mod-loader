@@ -5,7 +5,6 @@ from typing import overload
 from PySide6.QtGui import QPixmap, Qt
 from PySide6.QtWidgets import QLabel, QScrollArea, QWidget
 
-from dread_mod_loader import get_data_path
 from dread_mod_loader.gui.generated.scrollable_markdown_ui import Ui_ScrollableMarkdown
 
 
