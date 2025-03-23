@@ -405,8 +405,6 @@ class JsonMod(DreadMod):
         super().__init__(mod_info)
 
     def start(self, input_path: Path) -> None:
-        validate(self.configuration)
-
         self.input_path = input_path
         self.editor = PatcherEditor(self.input_path)
         self.lua_editor = LuaEditor()
@@ -416,6 +414,7 @@ class JsonMod(DreadMod):
         # trying to export again will fail schema validation
         configuration = deepcopy(self.configuration)
         self.apply_cosmetics(configuration["cosmetic_patches"])
+        validate(configuration)
 
         apply_patches(self.editor, self.lua_editor, configuration)
 
